@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/leadForm.css}" />
+
+    <title>Lead Form</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Lead Form</h1>
+    <!-- Form to collect lead details -->
+    <form th:action="@{/submit}" th:object="${leadDTO}" method="post" class="needs-validation" novalidate>
+        <input type="hidden" name="type" value="lead"/>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" th:field="*{name}" class="form-control" id="name" required>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name is required</div>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" th:field="*{email}" class="form-control" id="email" required>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email must be valid</div>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea th:field="*{message}" class="form-control" id="message" rows="3" required></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Message is required</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!-- Display success message if available -->
+    <div th:if="${message}" class="alert alert-success mt-3" role="alert">
+        <span th:text="${message}"></span>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.0/js/bootstrap.bundle.min.js}"></script>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+</html>

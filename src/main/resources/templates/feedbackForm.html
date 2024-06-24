@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feedback Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link th:href="@{/css/feedbackForm.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}" />
+    <title>Feedback Form</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Feedback Form</h1>
+    <form th:action="@{/feedback}" th:object="${feedbackDTO}" method="post" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name is required</div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" required>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email must be valid</div>
+        </div>
+        <div class="form-group">
+            <label for="rating">Rating</label>
+            <select class="form-control" id="rating" th:field="*{rating}" required>
+                <option value="1" th:selected="*{rating == 1}">1 star</option>
+                <option value="2" th:selected="*{rating == 2}">2 stars</option>
+                <option value="3" th:selected="*{rating == 3}">3 stars</option>
+                <option value="4" th:selected="*{rating == 4}">4 stars</option>
+                <option value="5" th:selected="*{rating == 5}">5 stars</option>
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Rating must be between 1 and 5</div>
+        </div>
+        <div class="form-group">
+            <label for="comments">Comments</label>
+            <textarea class="form-control" id="comments" th:field="*{comments}" required></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('comments')}" th:errors="*{comments}">Comments are required</div>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.0/js/bootstrap.bundle.min.js}"></script>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+</html>
