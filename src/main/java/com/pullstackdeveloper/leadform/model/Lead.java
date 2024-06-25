@@ -14,5 +14,4 @@ public class Lead {
     private Long id;
     private String name;
     private String email;
-    private String message;
 }

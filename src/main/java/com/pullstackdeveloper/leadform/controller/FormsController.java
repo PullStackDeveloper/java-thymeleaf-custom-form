@@ -28,17 +28,14 @@ public class FormsController {
                            @Valid FeedbackDTO feedbackDTO, BindingResult feedbackResult,
                            @Valid LeadDTO leadDTO, BindingResult leadResult,
                            Model model) {
-        switch (type) {
-            case "feedback":
-                model.addAttribute("feedback", new FeedbackDTO());
-                return "feedbackForm";
-            case "lead":
-            default:
-                model.addAttribute("lead", new LeadDTO());
-                return "leadForm";
+        if ("feedback".equals(type)) {
+            model.addAttribute("feedback", feedbackDTO);
+            return "feedbackForm";
+        } else {
+            model.addAttribute("lead", leadDTO);
+            return "leadForm";
         }
     }
-
 
     @PostMapping("/submit")
     public String submitForm(@RequestParam(name = "type", defaultValue = "lead") String type,
@@ -47,23 +44,21 @@ public class FormsController {
                              Model model) {
         if ("feedback".equals(type)) {
             if (feedbackResult.hasErrors()) {
-                // Add feedback object back to the model to re-render the form with error messages
                 model.addAttribute("feedback", feedbackDTO);
                 return "feedbackForm";
             }
             feedbackService.saveFeedback(feedbackDTO);
             model.addAttribute("message", "Feedback submitted successfully!");
-            model.addAttribute("feedback", new FeedbackDTO()); // Add a new FeedbackDTO to the model
+            model.addAttribute("feedback", new FeedbackDTO());
             return "feedbackForm";
         } else {
             if (leadResult.hasErrors()) {
-                // Add lead object back to the model to re-render the form with error messages
                 model.addAttribute("lead", leadDTO);
                 return "leadForm";
             }
             leadService.saveLead(leadDTO);
             model.addAttribute("message", "Lead submitted successfully!");
-            model.addAttribute("lead", new LeadDTO()); // Add a new LeadDTO to the model
+            model.addAttribute("lead", new LeadDTO());
             return "leadForm";
         }
     }

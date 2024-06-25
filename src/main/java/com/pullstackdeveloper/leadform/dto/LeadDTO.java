@@ -12,7 +12,4 @@ public class LeadDTO {
     @Email(message = "Email should be valid")
     @NotBlank(message = "Email is mandatory")
     private String email;
-
-    @NotBlank(message = "Message is mandatory")
-    private String message;
 }

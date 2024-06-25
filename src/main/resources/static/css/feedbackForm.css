@@ -1,24 +1,89 @@
-/* feedbackForm.css */
+html {
+    background-color: #111821 !important;
+}
+
 body {
-    background-color: #f8f9fa;
+    background-color: transparent !important;
+    padding: 0 !important;
 }
 
 .container {
-    background-color: #ffffff;
+    background-color: transparent !important;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #5217d1;
+    border-color: #5217d1;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #4915ba;
+    border-color: #4915ba;
 }
-.form-group  {
+
+.form-group {
     margin: 20px;
+}
+
+.styled-input,
+.styled-input select,
+.styled-input textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #b8babd; /* Define a cor do texto */
+    font-size: 1rem;
+    padding: 10px 5px;
+    transition: border-color 0.6s ease-in-out, box-shadow 0.9s ease-in-out;
+    border-radius: 0; /* Remove bordas arredondadas */
+    -webkit-appearance: none; /* Remove estilos padrão do select no Safari */
+    -moz-appearance: none; /* Remove estilos padrão do select no Firefox */
+    appearance: none; /* Remove estilos padrão do select nos outros navegadores */
+}
+
+.styled-input:focus,
+.styled-input select:focus,
+.styled-input textarea:focus {
+    border-color: #5217d1;
+    outline: none;
+    box-shadow: none;
+    color: #b8babd; /* Mantém a cor do texto ao focar */
+}
+
+.styled-input::placeholder,
+.styled-input select::placeholder,
+.styled-input textarea::placeholder {
+    color: #6c757d;
+    opacity: 0.7;
+}
+
+.form-label {
+    color: #495057;
+}
+
+/* Estilos para inputs inválidos e válidos */
+.styled-input.is-invalid,
+.styled-input select.is-invalid,
+.styled-input textarea.is-invalid {
+    border-bottom-color: red;
+}
+
+.styled-input.is-valid,
+.styled-input select.is-valid,
+.styled-input textarea.is-valid {
+    border-bottom-color: green;
+}
+
+/* Estilos específicos para os options do select */
+.styled-input select option {
+    background: transparent !important;
+    color: #b8babd;
+}
+.logo {
+    max-height: 100px;
+    margin: 0 auto;
 }

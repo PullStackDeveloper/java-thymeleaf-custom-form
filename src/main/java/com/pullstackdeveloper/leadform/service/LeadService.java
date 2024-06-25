@@ -16,7 +16,6 @@ public class LeadService {
         Lead lead = new Lead();
         lead.setName(leadDTO.getName());
         lead.setEmail(leadDTO.getEmail());
-        lead.setMessage(leadDTO.getMessage());
         return leadRepository.save(lead);
     }
 }
